@@ -2,7 +2,7 @@
 
 Compilador C++
 
-Compilador criado como avaliação para a disciplina de Compliadores
+Compilador criado como avaliaÃ§Ã£o para a disciplina de Compliadores
 Aluno: Icaro Matheus Eloi do Nascimento
 
 =================
@@ -22,8 +22,8 @@ V 4.0
 
 V 4.1
 - Melhorias de Desempenho
-- Correção de bugs 
+- CorreÃ§Ã£o de bugs 
 
 V 4.2 
 - Melhorias de Desempenho
-- Correção de bugs
+- CorreÃ§Ã£o de bugs
