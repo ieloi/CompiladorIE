@@ -1,10 +1,10 @@
 =================
 
-Compilador C++
+<h1>Compilador C++</h1>
 
-Compilador criado como avaliação para a disciplina de Compliadores
+<h2>Compilador criado como avaliação para a disciplina de Compliadores</h2>
 <br>
-Aluno: Icaro Matheus Eloi do Nascimento
+<h3>Aluno: Icaro Matheus Eloi do Nascimento</h3>
 
 =================
 
@@ -28,3 +28,6 @@ V 4.1
 V 4.2 
 - Melhorias de Desempenho
 - Correção de bugs
+
+V 4.3
+- Correção de VÁRIOS Bugs
