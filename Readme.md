@@ -2,9 +2,9 @@
 
 <h1>Compilador C++</h1>
 
-<h2>Compilador criado como avaliação para a disciplina de Compliadores</h2>
-<br>
-<h3>Aluno: Icaro Matheus Eloi do Nascimento</h3>
+<h3>Compilador criado como avaliação para a disciplina de Compliadores</h3>
+
+<h5>Aluno: Icaro Matheus Eloi do Nascimento</h5>
 
 =================
 
