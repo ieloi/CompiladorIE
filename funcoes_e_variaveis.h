@@ -55,7 +55,7 @@ int ehMinusculo(int c)
 
 int eh_palavra_reservada(string tk_formado)
 {
-	int res = NULL;
+	int res = 0;
 	for(int i = 0; i < 21 ; i++)
 	{
 		if(tk_formado == palavras_reservadas[i])
@@ -101,10 +101,28 @@ void verificaEstadoToken(int es)
 		}
 		break;
 	case 7:
-		gera_token("palavra reservada");
+		if(eh_palavra_reservada(tk_formado) == 1)
+		{
+			gera_token("palavra reservada");
+		}
+		else
+		{
+			erro = true;
+			msg = "erro de compilacao na linha ";
+			break;	
+		}
 		break;
 	case 10:
-		gera_token("palavra reservada");
+		if(eh_palavra_reservada(tk_formado) == 1)
+		{
+			gera_token("palavra reservada");
+		}
+		else
+		{
+			erro = true;
+			msg = "erro de compilacao na linha ";
+			break;	
+		}
 		break;
 	case 11:
 		gera_token("simbolo especial");

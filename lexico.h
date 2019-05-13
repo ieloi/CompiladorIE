@@ -183,7 +183,16 @@ void automato(char c)
 		}
 		break;
 	case 10:
-		encontrouFimToken(c);
+		if(ehMinusculo(c) != 0)
+		{
+			verificaEstadoToken(estado);
+			erro = true;
+			msg = "erro de compilacao na linha ";
+		}
+		else
+		{
+			encontrouFimToken(c);
+		}
 		break;
 	case 11:
 		if(c == '@')
