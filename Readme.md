@@ -30,4 +30,7 @@ V 4.2
 - Correção de bugs
 
 V 4.3
-- Correção de VÁRIOS Bugs
+- Correção de Bugs no reconhecimento de conteudos depois de um ( ou {
+
+V 4.4
+- Correção de Bugs no reconhecimento de Identificadores
