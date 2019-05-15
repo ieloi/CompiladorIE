@@ -81,7 +81,16 @@ void automato(char c)
 		}
 		else
 		{
-			encontrouFimToken(c);
+			if(c == '!' || c == '#' || c == '¨' || c == '&' || c == '?' || c == '°' || c == '|' || c == 'º' || c == '~' || c == '§' || c == '[' || c == ']' || c == 'ª')		
+			{
+				verificaEstadoToken(estado);
+				erro = true;
+				msg = "erro de compilacao na linha ";
+			}
+			else
+			{
+				encontrouFimToken(c);
+			}
 		}
 		break;
 	case 2:
@@ -183,16 +192,7 @@ void automato(char c)
 		}
 		break;
 	case 10:
-		if(ehMinusculo(c) != 0)
-		{
-			verificaEstadoToken(estado);
-			erro = true;
-			msg = "erro de compilacao na linha ";
-		}
-		else
-		{
-			encontrouFimToken(c);
-		}
+		encontrouFimToken(c);
 		break;
 	case 11:
 		if(c == '@')
