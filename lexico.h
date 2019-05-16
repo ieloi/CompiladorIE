@@ -342,13 +342,13 @@ void automato(char c)
 		}
 		break;
 	case 24:
-		if(c != '/')
-		{
-			estado = 24;
-		}
-		else if(c == '\n')
+		if(c == '\n')
 		{
 			countline++;
+			estado = 24;
+		}
+		else if(c != '/')
+		{
 			estado = 24;
 		}
 		else if(c == '/')
