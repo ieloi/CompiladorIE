@@ -180,7 +180,7 @@ void encontrouFimToken(char c)
 	}
 	else if(c == '\n' && estado != 0)
 	{
-		countline++;
+		//countline++;
 		tk_encontrado = true;
 	}
 	else if(c == '\n' && estado == 0)
