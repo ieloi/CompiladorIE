@@ -81,16 +81,7 @@ void automato(char c)
 		}
 		else
 		{
-			if(c == '!' || c == '#' || c == '¨' || c == '&' || c == '?' || c == '°' || c == '|' || c == 'º' || c == '~' || c == '§' || c == '[' || c == ']' || c == 'ª')		
-			{
-				verificaEstadoToken(estado);
-				erro = true;
-				msg = "erro de compilacao na linha ";
-			}
-			else
-			{
-				encontrouFimToken(c);
-			}
+			encontrouFimToken(c);
 		}
 		break;
 	case 2:
@@ -292,16 +283,7 @@ void automato(char c)
 		}
 		break;
 	case 20:
-		if(c == '!' || c == '#' || c == '¨' || c == '&' || c == '?' || c == '°' || c == '|' || c == 'º' || c == '~' || c == '§' || c == '[' || c == ']' || c == 'ª')		
-		{
-			verificaEstadoToken(estado);
-			erro = true;
-			msg = "erro de compilacao na linha ";
-		}
-		else
-		{
-			encontrouFimToken(c);
-		}
+		encontrouFimToken(c);
 		break;
 	case 21:
 		if(c == '=')
@@ -358,7 +340,7 @@ void automato(char c)
 		}
 		else
 		{
-			//encontrouFimToken(c);
+			
 		}
 		break;
 	case 25:
@@ -379,7 +361,7 @@ void automato(char c)
 		}
 		else
 		{
-			//encontrouFimToken(c);
+			
 		}
 		break;
 	case 26:
@@ -402,7 +384,7 @@ void automato(char c)
 		}
 		else
 		{
-			//encontrouFimToken(c);
+			
 		}
 		break;
 	case 28:
@@ -423,11 +405,10 @@ void automato(char c)
 		}
 		else
 		{
-			//encontrouFimToken(c);
+			
 		}
 		break;
 	default:
-		//encontrouFimToken(c);
 		erro = true;
 		break;
 	}

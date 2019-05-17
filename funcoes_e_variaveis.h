@@ -180,12 +180,17 @@ void encontrouFimToken(char c)
 	}
 	else if(c == '\n' && estado != 0)
 	{
-		//countline++;
 		tk_encontrado = true;
 	}
 	else if(c == '\n' && estado == 0)
 	{
 		countline++;
+	}
+	else if(c == '!' || c == '%' || c == '#' || c == '¨' || c == '&' || c == '?' || c == '°' || c == '|' || c == 'º' || c == '~' || c == '§' || c == '[' || c == ']' || c == 'ª')		
+	{
+		verificaEstadoToken(estado);
+		erro = true;
+		msg = "erro de compilacao na linha ";
 	}
 	else
 	{
