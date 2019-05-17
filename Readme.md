@@ -29,7 +29,10 @@ V 4.2
 - Correção de bugs
 
 V 4.3
-- Correção de Bugs no reconhecimento de conteudos depois de um ( ou {
+- Melhorias no reconhecimento de conteudos depois de um ( ou {
 
 V 4.4
-- Correção de Bugs no reconhecimento de Identificadores
+- Melhorias no reconhecimento de Identificadores
+
+V 5.0 
+- Melhorias no reconhecimento de Simbolos que não devem ser reconhecidos
