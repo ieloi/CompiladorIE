@@ -1,11 +1,6 @@
-<center>
-  <h1>Compilador C++</h1>
-
-  <h3>Compilador criado como avaliação para a disciplina de Compliadores</h3>
-
-  <h5>Aluno: Icaro Matheus Eloi do Nascimento</h5>
-</center>
-<hr />
+<h1>Compilador C++</h1>
+<h3>Compilador criado como avaliação para a disciplina de Compliadores</h3>
+<h5>Aluno: Icaro Matheus Eloi do Nascimento</h5>
 
 v 1.0
 - Suporte para o Automato de digitos
