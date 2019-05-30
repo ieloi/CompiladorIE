@@ -1,17 +1,3 @@
-programa teste;
+programa arts;
 
-//
-este programa tem como 
-objetivo a soma de dois 
-numeros e mostrar o 
-resultado
-//
-
-inteiro a=1;
-inteiro b = 2;
-
-inteiro c = a-b;
-@@ caso que verifica se eh negativo
-se (#c=0) entao {
-	escreva(negativo);
-}
+tipo 123 = qwerty;.

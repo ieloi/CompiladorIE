@@ -5,7 +5,8 @@
 
 using namespace std;
 
-struct info_token {
+struct info_token
+{
 	string token_formado;
 	int estado_token;
 	string tipo_token_formado;
@@ -27,31 +28,39 @@ string palavras_reservadas[21] = {"programa", "se", "entao", "senao", "enquanto"
 								  "funcao", "de", "para", "fim_do_se", "inicio", "fim"
 								 };
 
-int ehMaiusculoOuMinusculo(int c) {
+int ehMaiusculoOuMinusculo(int c)
+{
 	return isalpha(c);
 }
 
-int ehDigito(int c) {
+int ehDigito(int c)
+{
 	return isdigit(c);
 }
 
-int ehSimboloEspecial(int c) {
+int ehSimboloEspecial(int c)
+{
 	return ispunct(c);
 }
 
-int ehLetraOuDigito(int c) {
+int ehLetraOuDigito(int c)
+{
 	return isalnum(c);
 }
 
-int ehMinusculo(int c) {
+int ehMinusculo(int c)
+{
 	return islower(c);
 }
 
 // busca no array de palavras reservadas
-int eh_palavra_reservada(string tk_formado) {
+int eh_palavra_reservada(string tk_formado)
+{
 	int res = 0;
-	for(int i = 0; i < 21 ; i++) {
-		if(tk_formado == palavras_reservadas[i]) {
+	for(int i = 0; i < 21 ; i++)
+	{
+		if(tk_formado == palavras_reservadas[i])
+		{
 			res = 1;
 			break;
 		}
@@ -60,12 +69,13 @@ int eh_palavra_reservada(string tk_formado) {
 }
 
 // guarda as informações do token em uma estrutura
-info_token gera_token(string tipo) {
+info_token gera_token(string tipo)
+{
 	novo_token.token_formado = tk_formado;
 	novo_token.estado_token = estado;
 	novo_token.tipo_token_formado = tipo;
 
-	cout << " token formado: " << novo_token.token_formado << "\t" << "tipo: " << novo_token.tipo_token_formado << endl;
+	//cout << " token formado: " << novo_token.token_formado << "\t" << "tipo: " << novo_token.tipo_token_formado << endl;
 
 	estado = 0;
 	tk_formado = "";
@@ -74,31 +84,42 @@ info_token gera_token(string tipo) {
 }
 
 //Verifica o estado do token formado e define se ele é reconhecivel ou não
-void verificaEstadoToken(int es) {
-	switch(es) {
+void verificaEstadoToken(int es)
+{
+	switch(es)
+	{
 	case 1:
 		gera_token("identificador");
 		break;
 	case 4:
-		if(eh_palavra_reservada(tk_formado) == 1) {
+		if(eh_palavra_reservada(tk_formado) == 1)
+		{
 			gera_token("palavra reservada");
-		} else {
+		}
+		else
+		{
 			gera_token("identificador");
 		}
 		break;
 	case 7:
-		if(eh_palavra_reservada(tk_formado) == 1) {
+		if(eh_palavra_reservada(tk_formado) == 1)
+		{
 			gera_token("palavra reservada");
-		} else {
+		}
+		else
+		{
 			erro = true;
 			msg = "erro de compilacao na linha ";
 			break;
 		}
 		break;
 	case 10:
-		if(eh_palavra_reservada(tk_formado) == 1) {
+		if(eh_palavra_reservada(tk_formado) == 1)
+		{
 			gera_token("palavra reservada");
-		} else {
+		}
+		else
+		{
 			erro = true;
 			msg = "erro de compilacao na linha ";
 			break;
@@ -148,20 +169,32 @@ void verificaEstadoToken(int es) {
 }
 
 // funcao que delimita o fim de um token
-void encontrouFimToken(char c) {
-	if(c == ' ') {
+void encontrouFimToken(char c)
+{
+	if(c == ' ')
+	{
 		tk_encontrado = true;
-	} else if(c == '\t') {
+	}
+	else if(c == '\t')
+	{
 
-	} else if(c == '\n' && estado != 0) {
+	}
+	else if(c == '\n' && estado != 0)
+	{
 		tk_encontrado = true;
-	} else if(c == '\n' && estado == 0) {
+	}
+	else if(c == '\n' && estado == 0)
+	{
 		countline++;
-	} else if(c == '!' || c == '%' || c == '#' || c == '¨' || c == '&' || c == '?' || c == '°' || c == '|' || c == 'º' || c == '~' || c == '§' || c == '[' || c == ']' || c == 'ª') {
+	}
+	else if(c == '!' || c == '%' || c == '#' || c == '¨' || c == '&' || c == '?' || c == '°' || c == '|' || c == 'º' || c == '~' || c == '§' || c == '[' || c == ']' || c == 'ª')
+	{
 		verificaEstadoToken(estado);
 		erro = true;
 		msg = "erro de compilacao na linha ";
-	} else {
+	}
+	else
+	{
 		tk_encontrado = true;
 	}
 }
