@@ -31,21 +31,29 @@ void declara_tipo(ifstream& arq){
 		if(novo_token.tipo_token_formado != "identificador")
 		{
 			msg = " identificador esperado ";
+			cout << endl << msg << endl;
+			exit(0);
 		}
 		busca_token(arq);
 		if(novo_token.token_formado != "=")
 		{
 			msg = " = esperado ";
+			cout << endl << msg << endl;
+			exit(0);
 		}
 		busca_token(arq);
 		if(novo_token.tipo_token_formado != "identificador")
 		{
 			msg = " identificador esperado ";
+			cout << endl << msg << endl;
+			exit(0);
 		}
 		busca_token(arq);
 		if(novo_token.token_formado != ";")
 		{
 			msg = " ; esperado ";
+			cout << endl << msg << endl;
+			exit(0);
 		}
 	} while(novo_token.tipo_token_formado == "identificador");
 }
@@ -63,18 +71,24 @@ void sintatico(ifstream& arq) {
 	if(novo_token.token_formado != "programa")
 	{
 		msg = "programa esperado na linha ";
+		cout << endl << msg << endl;
+		exit(0);
 	}
 	
 	busca_token(arq);
 	if(novo_token.tipo_token_formado != "identificador")
 	{
 		msg = "identificador esperado na linha ";
+		cout << endl << msg << endl;
+		exit(0);
 	}
 	
 	busca_token(arq);
 	if(novo_token.token_formado != ";")
 	{
 		msg = "; esperado na linha ";
+		cout << endl << msg << endl;
+		exit(0);
 	}
 	
 	busca_token(arq);
@@ -84,6 +98,8 @@ void sintatico(ifstream& arq) {
 	if(novo_token.token_formado != ".")
 	{
 		msg = ". esperado na linha ";
+		cout << endl << msg << endl;
+		exit(0);
 	}
 }
 

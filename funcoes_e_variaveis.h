@@ -2,6 +2,7 @@
 #include <fstream>
 #include <locale>
 #include <string>
+#include <stdlib.h>
 
 using namespace std;
 
