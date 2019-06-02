@@ -180,6 +180,12 @@ void encontrouFimToken(char c)
 	{
 
 	}
+	else if(tk_formado == "////" || tk_formado == "@@" || tk_formado == "/##/")
+	{
+		estado = 0;
+		tk_formado = "";
+		tk_encontrado = false;
+	}
 	else if(c == '\n' && estado != 0)
 	{
 		tk_encontrado = true;

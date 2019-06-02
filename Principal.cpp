@@ -14,6 +14,7 @@ void busca_token(ifstream& arq)
 			if(tk_encontrado == true)
 			{
 				verificaEstadoToken(estado);
+				cout << "tk_formado: " << novo_token.token_formado << endl;
 				automato(c);
 				tk_encontrado = false;
 				break;
@@ -25,9 +26,9 @@ void busca_token(ifstream& arq)
 }
 
 void declara_tipo(ifstream& arq){
-	busca_token(arq);
 	do
 	{
+		busca_token(arq);
 		if(novo_token.tipo_token_formado != "identificador")
 		{
 			msg = " identificador esperado ";
@@ -55,6 +56,7 @@ void declara_tipo(ifstream& arq){
 			cout << endl << msg << endl;
 			exit(0);
 		}
+		busca_token(arq);
 	} while(novo_token.tipo_token_formado == "identificador");
 }
 
@@ -62,11 +64,10 @@ void bloco(ifstream& arq){
 	if(novo_token.token_formado == "tipo")
 	{
 		declara_tipo(arq);
-	}
+	} 
 }
 
 void sintatico(ifstream& arq) {
-	
 	busca_token(arq);
 	if(novo_token.token_formado != "programa")
 	{
