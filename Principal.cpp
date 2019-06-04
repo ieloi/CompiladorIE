@@ -25,7 +25,7 @@ void busca_token(ifstream& arq)
 	}
 }
 
-void lista_de_identificadores(ifstream& arq)
+void lista_de_identificadores(ifstream& arq) //retorna 1 token
 {
 	if(novo_token.tipo_token_formado != "identificador")
 	{
@@ -34,7 +34,7 @@ void lista_de_identificadores(ifstream& arq)
 		exit(0);
 	}
 	busca_token(arq);
-	do
+	while(novo_token.token_formado == ",")
 	{
 		if(novo_token.token_formado != ",")
 		{
@@ -49,42 +49,51 @@ void lista_de_identificadores(ifstream& arq)
 		}
 		busca_token(arq);
 	}
-	while(novo_token.token_formado == ",");
 }
 
-void definicoes_de_variaveis(ifstream& arq)
+void parametros_formais(ifstream& arq) //nao envia token
 {
+	if(novo_token.token_formado != "(")
+	{
+		msg = " ( esperado (parametros formais)";
+		cout << endl << msg << endl;
+		exit(0);
+	}
 	busca_token(arq);
 	do
 	{
-		if(novo_token.tipo_token_formado == "identificador")
-		{
-			lista_de_identificadores(arq);
+		if(novo_token.token_formado == "var") { 
+			busca_token(arq);
 		}
+		lista_de_identificadores(arq);
 		
 		if(novo_token.token_formado != ":")
 		{
-			msg = " : esperado (definicoes de variavel)";
+			msg = " : esperado (parametros formais)";
 			cout << endl << msg << endl;
 			exit(0);
 		}
 		busca_token(arq);
 		if(novo_token.tipo_token_formado != "identificador")
 		{
-			msg = " identificador esperado (definicoes de variavel)";
+			msg = " identificador esperado (parametros formais)";
 			cout << endl << msg << endl;
 			exit(0);
 		}
 		busca_token(arq);
-		if(novo_token.token_formado != ";")
+		if(novo_token.token_formado == ";")
 		{
-			msg = " ; esperado (definicoes de variavel)";
-			cout << endl << msg << endl;
-			exit(0);
+			busca_token(arq);
 		}
-		busca_token(arq);
 	}
-	while(novo_token.tipo_token_formado == "identificador");
+	while(novo_token.token_formado != ")");
+
+	if(novo_token.token_formado != ")")
+	{
+		msg = " ) esperado (parametros formais)";
+		cout << endl << msg << endl;
+		exit(0);
+	}
 }
 
 void declara_tipo(ifstream& arq)
@@ -124,6 +133,163 @@ void declara_tipo(ifstream& arq)
 	while(novo_token.tipo_token_formado == "identificador");
 }
 
+void definicoes_de_variaveis(ifstream& arq)
+{
+	busca_token(arq);
+	do
+	{
+		if(novo_token.tipo_token_formado == "identificador")
+		{
+			lista_de_identificadores(arq);
+		}
+
+		if(novo_token.token_formado != ":")
+		{
+			msg = " : esperado (definicoes de variavel)";
+			cout << endl << msg << endl;
+			exit(0);
+		}
+		busca_token(arq);
+		if(novo_token.tipo_token_formado != "identificador")
+		{
+			msg = " identificador esperado (definicoes de variavel)";
+			cout << endl << msg << endl;
+			exit(0);
+		}
+		busca_token(arq);
+		if(novo_token.token_formado != ";")
+		{
+			msg = " ; esperado (definicoes de variavel)";
+			cout << endl << msg << endl;
+			exit(0);
+		}
+		busca_token(arq);
+	}
+	while(novo_token.tipo_token_formado == "identificador");
+}
+
+void definicao_de_funcao(ifstream& arq)
+{
+	if(novo_token.token_formado != "funcao")
+	{
+		msg = " funcao esperado (definicao de funcao)";
+		cout << endl << msg << endl;
+		exit(0);
+	}
+	busca_token(arq);
+	if(novo_token.tipo_token_formado != "identificador")
+	{
+		msg = " identificador esperado (definicao de funcao)";
+		cout << endl << msg << endl;
+		exit(0);
+	}
+	busca_token(arq);
+	
+	if(novo_token.token_formado == "(")
+	{
+		parametros_formais(arq);
+	}
+	
+	busca_token(arq);
+	if(novo_token.token_formado != ":")
+	{
+		msg = " : esperado (definicao de funcao)";
+		cout << endl << msg << endl;
+		exit(0);
+	}
+	busca_token(arq);
+	if(novo_token.tipo_token_formado != "identificador")
+	{
+		msg = " identificador esperado (definicao de funcao)";
+		cout << endl << msg << endl;
+		exit(0);
+	}
+	busca_token(arq);
+	if(novo_token.token_formado != ";")
+	{
+		msg = " ; esperado (definicao de funcao)";
+		cout << endl << msg << endl;
+		exit(0);
+	}
+	busca_token(arq);
+}
+
+void definicao_de_procedimento(ifstream& arq)
+{
+	if(novo_token.token_formado != "procedimento")
+	{
+		msg = " procedimento esperado (definicao de procedimento)";
+		cout << endl << msg << endl;
+		exit(0);
+	}
+	busca_token(arq);
+	if(novo_token.tipo_token_formado != "identificador")
+	{
+		msg = " identificador esperado (definicao de procedimento)";
+		cout << endl << msg << endl;
+		exit(0);
+	}
+	busca_token(arq);
+	
+	if(novo_token.token_formado == "(")
+	{
+		parametros_formais(arq);
+	}
+	
+	busca_token(arq);
+	if(novo_token.token_formado != ";")
+	{
+		msg = "; esperado (definicao de procedimento)";
+		cout << endl << msg << endl;
+		exit(0);
+	}
+	busca_token(arq);
+}
+
+void comando_sem_rotulo(ifstream& arq)
+{
+	while(novo_token.token_formado == "leia")
+	{
+		busca_token(arq);
+		if(novo_token.token_formado != "(")
+		{
+			msg = " ( esperado (comando sem rotulo)";
+			cout << endl << msg << endl;
+			exit(0);
+		}
+		
+		busca_token(arq);
+		lista_de_identificadores(arq);
+		
+		if(novo_token.token_formado != ")")
+		{
+			msg = " ) esperado (comando sem rotulo)";
+			cout << endl << msg << endl;
+			exit(0);
+		}
+	}
+}
+
+void comando_composto(ifstream& arq)
+{
+	if(novo_token.token_formado != "inicio")
+	{
+		msg = " inicio esperado (comando composto)";
+		cout << endl << msg << endl;
+		exit(0);
+	}
+	busca_token(arq);
+	comando_sem_rotulo(arq);
+	
+	busca_token(arq);
+	if(novo_token.token_formado != "fim")
+	{
+		msg = " fim esperado (comando composto)";
+		cout << endl << msg << endl;
+		exit(0);
+	}
+}
+
 void bloco(ifstream& arq)
 {
 	if(novo_token.token_formado == "tipo")
@@ -134,6 +300,22 @@ void bloco(ifstream& arq)
 	{
 		definicoes_de_variaveis(arq);
 	}
+	while(novo_token.token_formado == "funcao" || novo_token.token_formado == "procedimento")
+	{
+		do
+		{
+			if(novo_token.token_formado == "funcao")
+			{
+				definicao_de_funcao(arq);
+			}
+			else
+			{
+				definicao_de_procedimento(arq);
+			}
+		}
+		while(novo_token.token_formado == "funcao" || novo_token.token_formado == "procedimento");
+	}
+	comando_composto(arq);
 }
 
 void sintatico(ifstream& arq)
