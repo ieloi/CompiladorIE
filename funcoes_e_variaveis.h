@@ -23,11 +23,11 @@ char c; // caracter que é lido do arquivo;
 
 info_token novo_token; // token que armazenará temporariamente as informações que serão enviadas ao sintatico
 
-string palavras_reservadas[24] = {"programa", "se", "entao", "senao", "enquanto",
+string palavras_reservadas[25] = {"programa", "se", "entao", "senao", "enquanto",
 								  "faca", "ate", "repita", "inteiro", "real", "caractere", "caso",
 								  "escolha", "fim_escolha", "procedimento",
 								  "funcao", "de", "para", "fim_do_se", "inicio", "fim",
-								  "tipo", "var", "leia"
+								  "tipo", "var", "leia", "imprima"
 								 };
 
 int ehMaiusculoOuMinusculo(int c)
@@ -59,7 +59,7 @@ int ehMinusculo(int c)
 int eh_palavra_reservada(string tk_formado)
 {
 	int res = 0;
-	for(int i = 0; i < 24 ; i++)
+	for(int i = 0; i < 25 ; i++)
 	{
 		if(tk_formado == palavras_reservadas[i])
 		{

@@ -248,14 +248,14 @@ void definicao_de_procedimento(ifstream& arq) // retorna 1 token
 	busca_token(arq);
 }
 
-void comando_sem_rotulo(ifstream& arq) // nao retorna token
+void comando_leia(ifstream& arq)
 {
 	while(novo_token.token_formado == "leia")
 	{
 		busca_token(arq);
 		if(novo_token.token_formado != "(")
 		{
-			msg = " ( esperado (comando sem rotulo) ";
+			msg = " ( esperado (comando leia)";
 			cout << endl << msg << countline << endl;
 			exit(0);
 		}
@@ -265,10 +265,147 @@ void comando_sem_rotulo(ifstream& arq) // nao retorna token
 
 		if(novo_token.token_formado != ")")
 		{
-			msg = " ) esperado (comando sem rotulo) ";
+			msg = " ) esperado (comando leia)";
 			cout << endl << msg << countline << endl;
 			exit(0);
 		}
+	}
+
+	busca_token(arq);
+}
+
+void termo(ifstream& arq) // retorna 1 token
+{
+	if(novo_token.tipo_token_formado != "identificador" && novo_token.tipo_token_formado != "digito")
+	{
+		msg = " identificador ou digito esperado (termo) ";
+		cout << endl << msg << countline << endl;
+		exit(0);
+	}
+	busca_token(arq);
+	while(novo_token.token_formado == "*" || novo_token.token_formado == "/" || novo_token.token_formado == "&&")
+	{
+		if(novo_token.token_formado != "*" && novo_token.token_formado != "/" && novo_token.token_formado != "&&")
+		{
+			msg = " + ou - ou || esperado (termo) ";
+			cout << endl << msg << countline << endl;
+			exit(0);
+		}
+		busca_token(arq);
+		if(novo_token.tipo_token_formado != "identificador" && novo_token.tipo_token_formado != "digito")
+		{
+			msg = " identificador ou digito esperado (termo) ";
+			cout << endl << msg << countline << endl;
+			exit(0);
+		}
+		busca_token(arq);
+	}
+}
+
+void expressao_simples(ifstream& arq) // retorna 1 token
+{
+	busca_token(arq);
+	if(novo_token.token_formado == "+" || novo_token.token_formado == "-")
+	{
+		busca_token(arq);
+	}
+	termo(arq);
+	while(novo_token.token_formado == "+" || novo_token.token_formado == "-" || novo_token.token_formado == "&&")
+	{
+		if(novo_token.token_formado != "+" && novo_token.token_formado != "-" && novo_token.token_formado != "||")
+		{
+			msg = " + ou - ou || esperado (expressao simples) ";
+			cout << endl << msg << countline << endl;
+			exit(0);
+		}
+		busca_token(arq);
+		termo(arq);
+	}
+}
+
+void expressao(ifstream& arq)
+{
+	expressao_simples(arq);
+
+	if(novo_token.token_formado == "=" || novo_token.token_formado == "<>" || novo_token.token_formado == "<"
+			|| novo_token.token_formado == "<=" || novo_token.token_formado == ">" || novo_token.token_formado == ">=")
+	{
+		expressao_simples(arq);
+	}
+}
+
+void lista_de_expressoes(ifstream& arq)
+{
+	expressao(arq);
+	while(novo_token.token_formado == ";")
+	{
+		if(novo_token.token_formado != ";")
+		{
+			msg = " ; esperado (lista de expressoes) ";
+			cout << endl << msg << countline << endl;
+			exit(0);
+		}
+		expressao(arq);
+	}
+}
+
+void comando_imprima(ifstream& arq) // retorna 1 token
+{
+	while(novo_token.token_formado == "imprima")
+	{
+		busca_token(arq);
+		if(novo_token.token_formado != "(")
+		{
+			msg = " ( esperado (comando imprima) ";
+			cout << endl << msg << countline << endl;
+			exit(0);
+		}
+
+		//busca_token(arq);
+		lista_de_expressoes(arq);
+
+		if(novo_token.token_formado != ")")
+		{
+			msg = " ) esperado (comando imprima) ";
+			cout << endl << msg << countline << endl;
+			exit(0);
+		}
+	}
+	busca_token(arq);
+}
+
+void comando_sem_rotulo(ifstream& arq) // nao retorna token
+{
+	if(novo_token.token_formado == "leia")
+	{
+		comando_leia(arq);
+	}
+
+	if(novo_token.tipo_token_formado == "identificador")
+	{
+		busca_token(arq);
+
+		if(novo_token.token_formado == ":=")
+		{
+			expressao(arq);
+		}
+
+		if(novo_token.token_formado == "(")
+		{
+			lista_de_expressoes(arq);
+			if(novo_token.token_formado != ")")
+			{
+				msg = " ) esperado (comando sem rotulo) ";
+				cout << endl << msg << countline << endl;
+				exit(0);
+			}
+			busca_token(arq);
+		}
+	}
+
+	if(novo_token.token_formado == "imprima")
+	{
+		comando_imprima(arq);
 	}
 }
 
@@ -286,7 +423,7 @@ void comando_composto(ifstream& arq) // nao retorna token
 	{
 		comando_sem_rotulo(arq);
 
-		busca_token(arq);
+		//busca_token(arq);
 		if(novo_token.token_formado != ";")
 		{
 			msg = "; esperado (comando composto) ";
