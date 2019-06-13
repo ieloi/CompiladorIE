@@ -113,7 +113,6 @@ void declara_tipo(ifstream& arq) // retorna 1 token
 			exit(0);
 		}
 		busca_token(arq);
-		// <tipo> -> <identificador>
 		if(novo_token.tipo_token_formado != "identificador")
 		{
 			msg = " identificador esperado (declaracao de tipos) ";
@@ -271,14 +270,27 @@ void comando_leia(ifstream& arq)
 	busca_token(arq);
 }
 
-void termo(ifstream& arq) // retorna 1 token
+void fator(ifstream& arq)
 {
-	if(novo_token.tipo_token_formado != "identificador" && novo_token.tipo_token_formado != "digito")
+	if(novo_token.tipo_token_formado == "identificador")
+	{
+		
+	}
+	else if(novo_token.tipo_token_formado == "digito")
+	{
+		
+	}
+	else
 	{
 		msg = " identificador ou digito esperado (termo) ";
 		cout << endl << msg << countline << endl;
 		exit(0);
 	}
+}
+
+void termo(ifstream& arq) // retorna 1 token
+{
+	fator(arq);
 	busca_token(arq);
 	while(novo_token.token_formado == "*" || novo_token.token_formado == "/" || novo_token.token_formado == "&&")
 	{
@@ -289,12 +301,7 @@ void termo(ifstream& arq) // retorna 1 token
 			exit(0);
 		}
 		busca_token(arq);
-		if(novo_token.tipo_token_formado != "identificador" && novo_token.tipo_token_formado != "digito")
-		{
-			msg = " identificador ou digito esperado (termo) ";
-			cout << endl << msg << countline << endl;
-			exit(0);
-		}
+		fator(arq);
 		busca_token(arq);
 	}
 }

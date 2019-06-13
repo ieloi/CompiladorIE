@@ -18,6 +18,7 @@ int main()
 		txtFile.close();
 	}
 
+	/*
 	if(erro == true)
 	{
 		cout << endl << msg << endl;
@@ -26,6 +27,9 @@ int main()
 	{
 		cout << endl << msg << endl;
 	}
+	*/
+	
+	cout << endl << msg << endl;
 
 	return 0;
 }
