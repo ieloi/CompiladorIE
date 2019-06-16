@@ -23,11 +23,11 @@ char c; // caracter que é lido do arquivo;
 
 info_token novo_token; // token que armazenará temporariamente as informações que serão enviadas ao sintatico
 
-string palavras_reservadas[25] = {"programa", "se", "entao", "senao", "enquanto",
+string palavras_reservadas[26] = {"programa", "se", "entao", "senao", "enquanto",
 								  "faca", "ate", "repita", "inteiro", "real", "caractere", "caso",
 								  "escolha", "fim_escolha", "procedimento",
 								  "funcao", "de", "para", "fim_do_se", "inicio", "fim",
-								  "tipo", "var", "leia", "imprima"
+								  "tipo", "var", "leia", "imprima", "do"
 								 };
 
 int ehMaiusculoOuMinusculo(int c)
@@ -59,7 +59,7 @@ int ehMinusculo(int c)
 int eh_palavra_reservada(string tk_formado)
 {
 	int res = 0;
-	for(int i = 0; i < 25 ; i++)
+	for(int i = 0; i < 26 ; i++)
 	{
 		if(tk_formado == palavras_reservadas[i])
 		{
@@ -181,7 +181,7 @@ void encontrouFimToken(char c)
 	{
 
 	}
-	else if(tk_formado == "////" || tk_formado == "@@" || tk_formado == "/##/")
+	else if(tk_formado == "////" || tk_formado == "/##/" || tk_formado == "@@")
 	{
 		estado = 0;
 		tk_formado = "";
@@ -195,7 +195,7 @@ void encontrouFimToken(char c)
 	{
 		countline++;
 	}
-	else if(c == '!' || c == '%' || c == '#' || c == '¨' || c == '&' || c == '?' || c == '°' || c == '|' || c == 'º' || c == '~' || c == '§' || c == '[' || c == ']' || c == 'ª')
+	else if(c == '!' || c == '%' || c == '#' || c == '¨' || c == '?' || c == '°' || c == 'º' || c == '~' || c == '§' || c == '[' || c == ']' || c == 'ª')
 	{
 		verificaEstadoToken(estado);
 		erro = true;

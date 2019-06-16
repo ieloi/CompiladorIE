@@ -58,6 +58,18 @@ void automato(char c)
 			estado = 20;
 			tk_formado.push_back(c);
 		}
+		// mudanças
+		else if(c == '|')
+		{
+			estado = 29;
+			tk_formado.push_back(c);
+		}
+		else if(c == '&')
+		{
+			estado = 30;
+			tk_formado.push_back(c);
+		}
+		//
 		else
 		{
 			encontrouFimToken(c);
@@ -203,17 +215,19 @@ void automato(char c)
 		}
 		else if(c == '\n')
 		{
-			estado = 13;
+			//estado = 13;
+			encontrouFimToken(c);
+			countline++;
 		}
 		else
 		{
-			encontrouFimToken(c);
+			//encontrouFimToken(c);
 		}
 		break;
-	case 13:
-		encontrouFimToken(c);
-		countline++;
-		break;
+	//case 13:
+		//encontrouFimToken(c);
+		//countline++;
+		//break;
 	case 14:
 		if(c == '-')
 		{
@@ -406,6 +420,28 @@ void automato(char c)
 		else
 		{
 
+		}
+		break;
+	case 29:
+		if(c == '|')
+		{
+			estado = 20;
+			tk_formado.push_back(c);
+		}
+		else
+		{
+			encontrouFimToken(c);
+		}
+		break;
+	case 30:
+		if(c == '&')
+		{
+			estado = 20;
+			tk_formado.push_back(c);
+		}
+		else
+		{
+			encontrouFimToken(c);
 		}
 		break;
 	default:

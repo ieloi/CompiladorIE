@@ -1,3 +1,15 @@
 programa arts;
+//comentario de varias linhas//
+tipo abc = qwerty;
+var def,ghi: azw;
 
-tipo 123 = qwerty;.
+inicio
+	@@comantario de liahas
+	abc := +4*3+7*5 > -4/3+7/5;
+	proc1(a;b);
+	enquanto 3>4 do
+		leia(a,b,c);
+		imprima(3<>4;a;+4*3+7*5);
+	x:=a&&b;
+fim
+.
