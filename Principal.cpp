@@ -17,17 +17,6 @@ int main()
 		sintatico(txtFile);
 		txtFile.close();
 	}
-
-	/*
-	if(erro == true)
-	{
-		cout << endl << msg << endl;
-	}
-	else
-	{
-		cout << endl << msg << endl;
-	}
-	*/
 	
 	cout << endl << msg << endl;
 

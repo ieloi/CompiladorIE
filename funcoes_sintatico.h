@@ -28,15 +28,41 @@ void fator(ifstream& arq)
 {
 	if(novo_token.tipo_token_formado == "identificador")
 	{
-		
+		busca_token(arq);
+		if(novo_token.token_formado == "(")
+		{
+			lista_de_expressoes(arq);
+
+			if(novo_token.token_formado != ")")
+			{
+				msg = " ) esperado (fator) ";
+				cout << endl << msg << countline << endl;
+				exit(0);
+			}
+
+			busca_token(arq);
+		}
 	}
 	else if(novo_token.tipo_token_formado == "digito")
 	{
+		busca_token(arq);
+	}
+	else if(novo_token.token_formado == "(")
+	{
+		expressao(arq);
+
+		if(novo_token.token_formado != ")")
+		{
+			msg = " ) esperado (fator) ";
+			cout << endl << msg << countline << endl;
+			exit(0);
+		}
 		
+		busca_token(arq);
 	}
 	else
 	{
-		msg = " identificador ou digito esperado (fator) ";
+		msg = " identificador, digito, chamada de função ou expressão esperado (fator) ";
 		cout << endl << msg << countline << endl;
 		exit(0);
 	}
@@ -45,7 +71,7 @@ void fator(ifstream& arq)
 void termo(ifstream& arq) // retorna 1 token
 {
 	fator(arq);
-	busca_token(arq);
+	//busca_token(arq);
 	while(novo_token.token_formado == "*" || novo_token.token_formado == "/" || novo_token.token_formado == "&&")
 	{
 		if(novo_token.token_formado != "*" && novo_token.token_formado != "/" && novo_token.token_formado != "&&")
@@ -56,7 +82,7 @@ void termo(ifstream& arq) // retorna 1 token
 		}
 		busca_token(arq);
 		fator(arq);
-		busca_token(arq);
+		//busca_token(arq);
 	}
 }
 
@@ -91,7 +117,7 @@ void expressao(ifstream& arq)
 	}
 }
 
-void lista_de_expressoes(ifstream& arq)
+void lista_de_expressoes(ifstream& arq) //retorna 1 token
 {
 	expressao(arq);
 	while(novo_token.token_formado == ";")
@@ -160,7 +186,7 @@ void comando_imprima(ifstream& arq) // retorna 1 token
 void comando_repetitivo(ifstream& arq)
 {
 	expressao(arq);
-	
+
 	if(novo_token.token_formado == "do")
 	{
 		busca_token(arq);
@@ -168,11 +194,38 @@ void comando_repetitivo(ifstream& arq)
 	}
 }
 
+void comando_condicional(ifstream& arq)
+{
+	expressao(arq);
+
+	if(novo_token.token_formado != "entao")
+	{
+		msg = " entao esperado (comando condicional) ";
+		cout << endl << msg << countline << endl;
+		exit(0);
+	}
+
+	busca_token(arq);
+	comando_sem_rotulo(arq);
+
+	if(novo_token.token_formado == "senao")
+	{
+		busca_token(arq);
+		comando_sem_rotulo(arq);
+	}
+
+}
+
 void comando_sem_rotulo(ifstream& arq) // nao retorna token
 {
 	if(novo_token.token_formado == "leia")
 	{
 		comando_leia(arq);
+	}
+
+	if(novo_token.token_formado == "se")
+	{
+		comando_condicional(arq);
 	}
 
 	if(novo_token.tipo_token_formado == "identificador")
@@ -196,7 +249,7 @@ void comando_sem_rotulo(ifstream& arq) // nao retorna token
 			busca_token(arq);
 		}
 	}
-	
+
 	if(novo_token.token_formado == "enquanto")
 	{
 		comando_repetitivo(arq);

@@ -11,5 +11,7 @@ inicio
 		leia(a,b,c);
 		imprima(3<>4;a;+4*3+7*5);
 	x:=a&&b;
+	se a(2>3) entao leia(a) senao leia(b);
+	
 fim
 .
