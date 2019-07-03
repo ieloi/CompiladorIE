@@ -30,3 +30,6 @@ V 4.4
 
 V 5.0 
 - Melhorias no reconhecimento de Simbolos que não devem ser reconhecidos
+
+V 6.0 
+- Inclusão do Analisador Sintático
