@@ -1,4 +1,3 @@
-<h1>Compilador C++</h1>
 <h3>Analisador lexico e sintático desenvolvido como forma de avaliação para a disciplina de Compliadores</h3>
 <h4>Aluno: Icaro Matheus Eloi do Nascimento</h4>
 
