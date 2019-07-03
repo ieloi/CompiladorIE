@@ -1,17 +1,17 @@
-programa teste;
+programa arts;
+//comentario de varias linhas//
+tipo abc = qwerty;
+var def,ghi: azw;
 
-//
-este programa tem como 
-objetivo a soma de dois 
-numeros e mostrar o 
-resultado
-//
-
-inteiro a=1;
-inteiro b = 2;
-
-inteiro c = a-b;
-@@ caso que verifica se eh negativo
-se (#c=0) entao {
-	escreva(negativo);
-}
+inicio
+	@@comantario de liahas
+	abc := +4*3+7*5 > -4/3+7/5;
+	proc1(a;b);
+	enquanto 3>4 do
+		leia(a,b,c);
+		imprima(3<>4;a;+4*3+7*5);
+	x:=a&&b;
+	se a(2>3) entao leia(a) senao leia(b);
+	
+fim
+.
