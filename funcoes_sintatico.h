@@ -24,7 +24,7 @@ void busca_token(ifstream& arq)
 	}
 }
 
-void fator(ifstream& arq)
+void fator(ifstream& arq) //retorna 1 token
 {
 	if(novo_token.tipo_token_formado == "identificador")
 	{
@@ -360,9 +360,9 @@ void definicao_de_funcao(ifstream& arq) // retorna 1 token
 	if(novo_token.token_formado == "(")
 	{
 		parametros_formais(arq);
+		busca_token(arq);
 	}
-
-	busca_token(arq);
+	
 	if(novo_token.token_formado != ":")
 	{
 		msg = " : esperado (definicao de funcao) ";
@@ -406,9 +406,9 @@ void definicao_de_procedimento(ifstream& arq) // retorna 1 token
 	if(novo_token.token_formado == "(")
 	{
 		parametros_formais(arq);
+		busca_token(arq);
 	}
 
-	busca_token(arq);
 	if(novo_token.token_formado != ";")
 	{
 		msg = "; esperado (definicao de procedimento) ";
@@ -416,6 +416,7 @@ void definicao_de_procedimento(ifstream& arq) // retorna 1 token
 		exit(0);
 	}
 	busca_token(arq);
+	
 }
 
 void lista_de_identificadores(ifstream& arq) //retorna 1 token
